@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn corr_web.app:app
