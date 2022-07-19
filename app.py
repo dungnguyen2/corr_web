@@ -9,8 +9,7 @@ def index():
     ns_rate = ''
     if request.method == 'POST' and 'temp' in request.form:
         temp = float(request.form.get('temp'))
-        press = float(request.form.get('press'))
-        press = 35
+        press = float(request.form.get('press'))        
         CO2fraction = float(request.form.get('CO2fraction'))        
         holdup = float(request.form.get('holdup'))
         gasrate = float(request.form.get('gasrate'))
