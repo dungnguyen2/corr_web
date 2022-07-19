@@ -1,0 +1,57 @@
+<!doctype html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>FreeCorp Corrosion Model</title>
+	
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<h1>FreeCorp Corrosion Model</h1>
+
+<body>
+
+<div class="main">
+	<form class="pure-form" method="POST" action="/fc">
+	Temperature (degC):<br>
+	<input type="text" name="temp" value = 120><br>
+	Pressure (barg):<br>
+	<input type="text" name="press" value = 35><br>	
+	CO2 fraction:<br>
+	<input type="text" name="CO2fraction"  value = 0.2> <br>		
+	Gas flowrate (mmscfd):<br>
+	<input type="text" name="gasrate" value = 100.0 >  <br>	
+	MW:<br>
+	<input type="text" name="mw" value = 24.0 >  <br>		
+	Pipeline diameter (m):<br>
+	<input type="text" name="dia" value = 0.4 >  <br>			
+	H2S (ppm):<br>
+	<input type="text" name="concH2Sppm" value = 0.0 >  <br>			
+	Fe (ppm):<br>
+	<input type="text" name="concFeppm" value = 0.0 >  <br>			
+	Acid Acetic (ppm):<br>
+	<input type="text" name="concHAcppm" value = 0.0 >  <br>			
+	pH:<br>
+	<input type="text" name="ph" value = 5.4 >  <br>			
+	<button type="submit" class="pure-button pure-button-primary" value="Submit">Calculate</button>
+	</form>
+</div>
+
+<br>
+
+<div class="main">
+	{% if fc_rate %}
+	    <p>
+	    <h1 style="border:2px solid Tomato;">
+        {% print("The corrosion rate is {:.2f} mm/year".format(fc_rate)) %}
+        </h1>
+        </p>
+	{% endif %}
+</div>
+
+</body>
