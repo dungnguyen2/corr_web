@@ -27,7 +27,7 @@ function global:deactivate ([switch]$NonDestructive) {
 
 deactivate -nondestructive
 
-$env:VIRTUAL_ENV="G:\OneDrive\flask-tutorial\corr_web\corr"
+$env:VIRTUAL_ENV="G:\OneDrive\Working Tools\corr_web\corr_web\corr"
 
 if (! $env:VIRTUAL_ENV_DISABLE_PROMPT) {
     # Set the prompt to include the env name

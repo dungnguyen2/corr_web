@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=G:\OneDrive\flask-tutorial\corr_web\corr"
+set "VIRTUAL_ENV=G:\OneDrive\Working Tools\corr_web\corr_web\corr"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"
