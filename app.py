@@ -26,7 +26,7 @@ def index():
         ionstrength = float(request.form.get('ionstrength'))
         roughness = float(request.form.get('roughness'))
         ns_rate = ns_corr(temp, press, CO2fraction, holdup, mass_g, mw, vol_l, density_l, gasrate, mass_l, vis_l, vis_g, dia, bicarbonate, ionstrength, roughness)
-    return render_template("bmi_calc.html",
+    return render_template("ns_calc.html",
 	                        ns_rate=ns_rate)
 
 def ns_corr(temp, press, CO2fraction, holdup, mass_g, mw, vol_l, density_l, gasrate, mass_l, vis_l, vis_g, dia, bicarbonate, ionstrength, roughness):
