@@ -9,8 +9,7 @@ def index():
     ns_rate = ''
     if request.method == 'POST' and 'temp' in request.form:
         temp = float(request.form.get('temp'))
-        press = float(request.form.get('press'))
-        press = 35
+        press = float(request.form.get('press'))        
         CO2fraction = float(request.form.get('CO2fraction'))        
         holdup = float(request.form.get('holdup'))
         gasrate = float(request.form.get('gasrate'))
@@ -60,6 +59,5 @@ def ns_corr(temp, press, CO2fraction, holdup, mass_g, mw, vol_l, density_l, gasr
     return tempo
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    app.debug = True    
     app.run(debug=True)
