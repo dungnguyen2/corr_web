@@ -4,7 +4,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>FreeCorp Corrosion Model</title>
+	<title>Nyborg Corrosion Model</title>
 	
     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
 
@@ -12,16 +12,16 @@
 
 </head>
 
-<h1>FreeCorp Corrosion Model</h1>
+<h1>Nyborg Corrosion Model</h1>
 
 <body>
 
 <div class="main">
-	<form class="pure-form" method="POST" action="/fc">
+	<form class="pure-form" method="POST" action="/nb">
 	Temperature (degC):<br>
 	<input type="text" name="temp" value = 120><br>
 	Pressure (barg):<br>
-	<input type="text" name="press" value = 35><br>	
+	<input type="text" name="press" value = 20><br>	
 	CO2 fraction:<br>
 	<input type="text" name="CO2fraction"  value = 0.2> <br>		
 	Gas flowrate (mmscfd):<br>
@@ -29,11 +29,11 @@
 	MW:<br>
 	<input type="text" name="mw" value = 24.0 >  <br>		
 	Pipeline diameter (m):<br>
-	<input type="text" name="dia" value = 0.4 >  <br>			
-	H2S (ppm):<br>
-	<input type="text" name="concH2Sppm" value = 0.0 >  <br>			
+	<input type="text" name="dia" value = 0.4 >  <br>				
+	Ambient temperature (degC):<br>
+	<input type="text" name="amb_temp" value = 25 >  <br>				
 	Fe (ppm):<br>
-	<input type="text" name="concFeppm" value = 0.0 >  <br>			
+	<input type="text" name="concFeppm" value = 100 >  <br>			
 	Acid Acetic (ppm):<br>
 	<input type="text" name="concHAcppm" value = 0.0 >  <br>			
 	pH:<br>
@@ -45,10 +45,17 @@
 <br>
 
 <div class="main">
-	{% if fc_rate %}
-	    <p>
-	    <h1 style="border:2px solid Tomato;">
-        {% print("The corrosion rate = {:.2f} mm/year".format(fc_rate)) %}
+	{% if nb_rate %}
+	    <p>	    <h1 style="border:2px solid Tomato;">
+        {% print("Corrosion rate = {:.2f} mm/year".format(nb_rate)) %}
+        
+        </h1>
+        </p>
+	{% endif %}
+	{% if conden_rate %}
+	    <p>	    <h1 style="border:2px solid Tomato;">
+        {% print("Condensation rate = {:.2f} g/m2/s".format(conden_rate)) %}
+        
         </h1>
         </p>
 	{% endif %}

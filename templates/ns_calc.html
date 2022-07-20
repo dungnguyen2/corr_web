@@ -56,7 +56,14 @@
 	{% if ns_rate %}
 	    <p>
 	    <h1 style="border:2px solid Tomato;">
-        {% print("The corrosion rate is {:.2f} mm/year".format(ns_rate)) %}
+        {% print("The corrosion rate = {:.2f} mm/year".format(ns_rate)) %}
+        </h1>
+        </p>
+	{% endif %}
+	{% if ph %}
+	    <p>
+	    <h1 style="border:2px solid Tomato;">
+        {% print("Calculated pH = {:.2f}".format(ph)) %}
         </h1>
         </p>
 	{% endif %}
