@@ -19,33 +19,33 @@
 <div class="main">
 	<form class="pure-form" method="POST" action="/ns">
 	Temperature (degC):<br>
-	<input type="text" name="temp" value = 120><br>
+	<input type="text" name="temp" value = {{temp}}><br>
 	Pressure (barg):<br>
-	<input type="text" name="press" value = 35><br>	
+	<input type="text" name="press" value = {{press}}><br>	
 	CO2 fraction:<br>
-	<input type="text" name="CO2fraction"  value = 0.2> <br>	
+	<input type="text" name="CO2fraction"  value = {{CO2fraction}}> <br>	
 	Hold up:<br>
-	<input type="text" name="holdup" value = 1.0 >  <br>	
+	<input type="text" name="holdup" value = {{holdup}} >  <br>	
 	Gas flowrate (mmscfd):<br>
-	<input type="text" name="gasrate" value = 100.0 >  <br>	
+	<input type="text" name="gasrate" value = {{gasrate}} >  <br>	
 	MW:<br>
-	<input type="text" name="mw" value = 24.0 >  <br>	
+	<input type="text" name="mw" value = {{mw}} >  <br>	
 	Liquid flowrate (m3/hr):<br>
-	<input type="text" name="vol_l" value = 1 >  <br>	
+	<input type="text" name="vol_l" value = {{vol_l}} >  <br>	
 	Density of liquid (kg/m3):<br>
-	<input type="text" name="density_l" value = 800 >  <br>	
+	<input type="text" name="density_l" value = {{density_l}} >  <br>	
 	Viscosity of liquid (cp):<br>
-	<input type="text" name="vis_l" value = 1.22 >  <br>	
+	<input type="text" name="vis_l" value = {{vis_l}} >  <br>	
 	Viscosity of gas (cp):<br>
-	<input type="text" name="vis_g" value = 0.012 >  <br>	
+	<input type="text" name="vis_g" value = {{vis_g}} >  <br>	
 	Pipeline diameter (m):<br>
-	<input type="text" name="dia" value = 0.4 >  <br>	
+	<input type="text" name="dia" value = {{dia}} >  <br>	
 	Pipeline roughness (m):<br>
-	<input type="text" name="roughness" value = 0.00005 >  <br>	
+	<input type="text" name="roughness" value = {{roughness}} >  <br>	
 	Bicarbonate :<br>
-	<input type="text" name="bicarbonate" value = 2003 >  <br>	
+	<input type="text" name="bicarbonate" value = {{bicarbonate}} >  <br>	
 	Ion strength :<br>
-	<input type="text" name="ionstrength" value = 39.66 >  <br>	
+	<input type="text" name="ionstrength" value = {{ionstrength}} >  <br>	
 	<button type="submit" class="pure-button pure-button-primary" value="Submit">Calculate</button>
 	</form>
 </div>
@@ -68,5 +68,5 @@
         </p>
 	{% endif %}
 </div>
-
+<h2 style="text-align:center;"><a href="\">Home</a></h2>
 </body>

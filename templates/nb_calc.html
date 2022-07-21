@@ -19,25 +19,25 @@
 <div class="main">
 	<form class="pure-form" method="POST" action="/nb">
 	Temperature (degC):<br>
-	<input type="text" name="temp" value = 120><br>
+	<input type="text" name="temp" value = {{temp}}><br>
 	Pressure (barg):<br>
-	<input type="text" name="press" value = 20><br>	
+	<input type="text" name="press" value = {{press}}><br>	
 	CO2 fraction:<br>
-	<input type="text" name="CO2fraction"  value = 0.2> <br>		
+	<input type="text" name="CO2fraction"  value = {{CO2fraction}}> <br>		
 	Gas flowrate (mmscfd):<br>
-	<input type="text" name="gasrate" value = 100.0 >  <br>	
+	<input type="text" name="gasrate" value = {{gasrate}} >  <br>	
 	MW:<br>
-	<input type="text" name="mw" value = 24.0 >  <br>		
+	<input type="text" name="mw" value = {{mw}} >  <br>		
 	Pipeline diameter (m):<br>
-	<input type="text" name="dia" value = 0.4 >  <br>				
+	<input type="text" name="dia" value = {{dia}} >  <br>				
 	Ambient temperature (degC):<br>
-	<input type="text" name="amb_temp" value = 25 >  <br>				
+	<input type="text" name="amb_temp" value = {{amb_temp}}>  <br>				
 	Fe (ppm):<br>
-	<input type="text" name="concFeppm" value = 100 >  <br>			
+	<input type="text" name="concFeppm" value = {{concFeppm}} >  <br>			
 	Acid Acetic (ppm):<br>
-	<input type="text" name="concHAcppm" value = 0.0 >  <br>			
+	<input type="text" name="concHAcppm" value = {{concHAcppm}} >  <br>			
 	pH:<br>
-	<input type="text" name="ph" value = 5.4 >  <br>			
+	<input type="text" name="ph" value = {{ph}} >  <br>			
 	<button type="submit" class="pure-button pure-button-primary" value="Submit">Calculate</button>
 	</form>
 </div>
@@ -61,4 +61,5 @@
 	{% endif %}
 </div>
 
+<h2 style="text-align:center;"><a href="\">Home</a></h2>
 </body>

@@ -14,6 +14,7 @@ def index():
 def nb():
     nb_rate = ''
     conden_rate = ''
+    temp, press, CO2fraction, mw, gasrate, amb_temp, concFeppm, concHAcppm, ph, dia = 100, 35, 0.2, 24, 100, 20, 100, 0, 5.6, 0.4
     if request.method == 'POST' and 'temp' in request.form:
         temp = float(request.form.get('temp'))
         press = float(request.form.get('press'))        
@@ -31,7 +32,11 @@ def nb():
         density_g = mass_g / vol_g        
         density_g = mass_g / v_sg
         nb_rate, conden_rate = nb_corr(density_g, v_sg, dia, press, amb_temp, temp, mw, CO2fraction, concFeppm, concHAcppm, ph)        
-    return render_template("nb_calc.html", nb_rate=nb_rate, conden_rate = conden_rate)
+    return render_template("nb_calc.html", nb_rate=nb_rate, conden_rate = conden_rate, 
+                           temp = str(temp), press = str(press), CO2fraction = str(CO2fraction),
+                           mw = str(mw), gasrate = str(gasrate), amb_temp = str(amb_temp),
+                           concFeppm = str(concFeppm), concHAcppm = str(concHAcppm),
+                           ph = str(ph), dia = str(dia))
     #return render_template("nb_calc.html", nb_rate=nb_rate)
 
 def nb_corr(density_g, v_sg, dia, press, amb_temp, temp, mw, CO2fraction, concFeppm, concHAcppm, ph):    
@@ -91,6 +96,7 @@ def nb_corr(density_g, v_sg, dia, press, amb_temp, temp, mw, CO2fraction, concFe
 @app.route('/fc', methods=['GET', 'POST'])
 def fc():
     fc_rate = ''
+    temp, press, CO2fraction, mw, gasrate, concH2Sppm, concFeppm, concHAcppm, ph, dia = 100, 35, 0.2, 24, 100, 0, 100, 0, 5.6, 0.4
     if request.method == 'POST' and 'temp' in request.form:
         temp = float(request.form.get('temp'))
         press = float(request.form.get('press'))        
@@ -105,7 +111,10 @@ def fc():
         pco2 = CO2fraction * press
         v_sg = gasrate/35.2/(0.76*dia**2)*1e6/press
         fc_rate=fc_corr(mw, temp, gasrate, CO2fraction, press, v_sg,  dia, pco2,concH2Sppm, concFeppm,concHAcppm,ph)            
-    return render_template("fc_calc.html", fc_rate=fc_rate)
+    return render_template("fc_calc.html", fc_rate=fc_rate, temp = str(temp), press = str(press), CO2fraction = str(CO2fraction),
+                                                            mw = str(mw), gasrate = str(gasrate), concH2Sppm = str(concH2Sppm),
+                                                            concFeppm = str(concFeppm), concHAcppm = str(concHAcppm),
+                                                            ph = str(ph), dia = str(dia))
             
 def fc_corr(mw, temp, gasrate, CO2fraction, press, v_sg,  dia, pco2,concH2Sppm, concFeppm,concHAcppm,ph):
     temp_K = temp + 273
@@ -121,6 +130,8 @@ def fc_corr(mw, temp, gasrate, CO2fraction, press, v_sg,  dia, pco2,concH2Sppm, 
 def ns():
     ns_rate = ''
     ph = ''
+    temp, press, CO2fraction, mw, gasrate, dia = 100, 35, 0.2, 24, 100, 0.4
+    holdup, vol_l, density_l, vis_l, vis_g, bicarbonate, ionstrength, roughness = 1.0, 1.0, 800, 1.22, 0.012, 2003, 39.66, 0.00005
     if request.method == 'POST' and 'temp' in request.form:
         temp = float(request.form.get('temp'))
         press = float(request.form.get('press'))        
@@ -140,7 +151,11 @@ def ns():
         roughness = float(request.form.get('roughness'))
         ns_rate, ph = ns_corr(temp, press, CO2fraction, holdup, mass_g, mw, vol_l, density_l, gasrate, mass_l, vis_l, vis_g, dia, bicarbonate, ionstrength, roughness)
     return render_template("ns_calc.html",
-	                        ns_rate=ns_rate, ph = ph)
+	                        ns_rate=ns_rate, ph = ph,
+                            temp = str(temp), press = str(press), CO2fraction = str(CO2fraction), mw = str(mw), gasrate= str(gasrate), 
+                            dia = str(dia),  holdup = str(holdup), vol_l = str(vol_l), density_l = str(density_l), 
+                            vis_l = str(vis_l), vis_g = str(vis_g), bicarbonate = str(bicarbonate), 
+                            ionstrength = str(ionstrength), roughness = str(roughness))
 
 def ns_corr(temp, press, CO2fraction, holdup, mass_g, mw, vol_l, density_l, gasrate, mass_l, vis_l, vis_g, dia, bicarbonate, ionstrength, roughness):
     
