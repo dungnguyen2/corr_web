@@ -17,30 +17,30 @@ def nb():
     temp, press, CO2fraction, mw, gasrate, amb_temp, concFeppm, concHAcppm, ph, dia = 100, 35, 0.2, 24, 100, 20, 100, 0, 5.6, 0.4
     if request.method == 'POST' and 'temp' in request.form:
         temp = float(request.form.get('temp'))
-        press = float(request.form.get('press'))        
+        press = float(request.form.get('press'))
         CO2fraction = float(request.form.get('CO2fraction'))
-        mw  = float(request.form.get('mw'))                
-        gasrate = float(request.form.get('gasrate'))        
-        amb_temp = float(request.form.get('amb_temp'))        
+        mw  = float(request.form.get('mw'))
+        gasrate = float(request.form.get('gasrate'))
+        amb_temp = float(request.form.get('amb_temp'))
         concFeppm  = float(request.form.get('concFeppm'))
         concHAcppm  = float(request.form.get('concHAcppm'))
-        ph  = float(request.form.get('ph'))        
-        dia = float(request.form.get('dia'))        
-        v_sg = gasrate/35.2/(0.76*dia**2)*1e6/press        
+        ph  = float(request.form.get('ph'))
+        dia = float(request.form.get('dia'))
+        v_sg = gasrate/35.2/(0.76*dia**2)*1e6/press
         mass_g = 100/35.4*1762*mw #kg/hr
         vol_g = gasrate/35.2/mw*1e6/press
-        density_g = mass_g / vol_g        
+        density_g = mass_g / vol_g
         density_g = mass_g / v_sg
-        nb_rate, conden_rate = nb_corr(density_g, v_sg, dia, press, amb_temp, temp, mw, CO2fraction, concFeppm, concHAcppm, ph)        
-    return render_template("nb_calc.html", nb_rate=nb_rate, conden_rate = conden_rate, 
+        nb_rate, conden_rate = nb_corr(density_g, v_sg, dia, press, amb_temp, temp, mw, CO2fraction, concFeppm, concHAcppm, ph)
+    return render_template("nb_calc.html", nb_rate=nb_rate, conden_rate = conden_rate,
                            temp = str(temp), press = str(press), CO2fraction = str(CO2fraction),
                            mw = str(mw), gasrate = str(gasrate), amb_temp = str(amb_temp),
                            concFeppm = str(concFeppm), concHAcppm = str(concHAcppm),
                            ph = str(ph), dia = str(dia))
     #return render_template("nb_calc.html", nb_rate=nb_rate)
 
-def nb_corr(density_g, v_sg, dia, press, amb_temp, temp, mw, CO2fraction, concFeppm, concHAcppm, ph):    
-    surface_tension_g = 0.1        
+def nb_corr(density_g, v_sg, dia, press, amb_temp, temp, mw, CO2fraction, concFeppm, concHAcppm, ph):
+    surface_tension_g = 0.1
     density_l = 700
     # Velocity of gas
     velocity_gas = v_sg/24/3600
@@ -85,9 +85,9 @@ def nb_corr(density_g, v_sg, dia, press, amb_temp, temp, mw, CO2fraction, concFe
     #velocity_gas = 0.32
     pco2 = CO2fraction * pressure_total
     cd = tol.condensation(temperature, temperature_o, surface_tension_g, density_g,
-                          density_l, velocity_gas, thermal_conduc_w, thermal_conduc_wall, 
-                          viscosity_g, heat_capacity_g, pipe_id, thermal_conduc_g, pressure_total, 
-                          diffusivity_vH2O_g, thickness_wall, thickness_insulation, thermal_conduc_insulation, 
+                          density_l, velocity_gas, thermal_conduc_w, thermal_conduc_wall,
+                          viscosity_g, heat_capacity_g, pipe_id, thermal_conduc_g, pressure_total,
+                          diffusivity_vH2O_g, thickness_wall, thickness_insulation, thermal_conduc_insulation,
                           molecular_weight_g, pressure_critical_g, pressure_critical_w, temperature_critical_g, temperature_critical_w)
     cd.run()
     nyborg = tol.nyborg(cd.condensation_rate, temperature, pco2, concFeppm, concHAcppm, ph)
@@ -99,30 +99,30 @@ def fc():
     temp, press, CO2fraction, mw, gasrate, concH2Sppm, concFeppm, concHAcppm, ph, dia = 100, 35, 0.2, 24, 100, 0, 100, 0, 5.6, 0.4
     if request.method == 'POST' and 'temp' in request.form:
         temp = float(request.form.get('temp'))
-        press = float(request.form.get('press'))        
+        press = float(request.form.get('press'))
         CO2fraction = float(request.form.get('CO2fraction'))
-        mw  = float(request.form.get('mw'))                
+        mw  = float(request.form.get('mw'))
         gasrate = float(request.form.get('gasrate'))
         concH2Sppm  = float(request.form.get('concH2Sppm'))
         concFeppm  = float(request.form.get('concFeppm'))
         concHAcppm  = float(request.form.get('concHAcppm'))
-        ph  = float(request.form.get('ph'))        
+        ph  = float(request.form.get('ph'))
         dia = float(request.form.get('dia'))
         pco2 = CO2fraction * press
         v_sg = gasrate/35.2/(0.76*dia**2)*1e6/press
-        fc_rate=fc_corr(mw, temp, gasrate, CO2fraction, press, v_sg,  dia, pco2,concH2Sppm, concFeppm,concHAcppm,ph)            
+        fc_rate=fc_corr(mw, temp, gasrate, CO2fraction, press, v_sg,  dia, pco2,concH2Sppm, concFeppm,concHAcppm,ph)
     return render_template("fc_calc.html", fc_rate=fc_rate, temp = str(temp), press = str(press), CO2fraction = str(CO2fraction),
                                                             mw = str(mw), gasrate = str(gasrate), concH2Sppm = str(concH2Sppm),
                                                             concFeppm = str(concFeppm), concHAcppm = str(concHAcppm),
                                                             ph = str(ph), dia = str(dia))
-            
+
 def fc_corr(mw, temp, gasrate, CO2fraction, press, v_sg,  dia, pco2,concH2Sppm, concFeppm,concHAcppm,ph):
     temp_K = temp + 273
     v_sg = gasrate/35.2/(0.76*dia**2)*1e6/press
     pco2 = press * CO2fraction
     pm = point_model_02.pointmodel(temp_K, press, v_sg,  dia, pco2,concH2Sppm, concFeppm,concHAcppm,ph)
     pm.AddCommonReactionCurve()
-    corr=pm.getCR()            
+    corr=pm.getCR()
     return corr
 
 
@@ -134,8 +134,8 @@ def ns():
     holdup, vol_l, density_l, vis_l, vis_g, bicarbonate, ionstrength, roughness = 1.0, 1.0, 800, 1.22, 0.012, 2003, 39.66, 0.00005
     if request.method == 'POST' and 'temp' in request.form:
         temp = float(request.form.get('temp'))
-        press = float(request.form.get('press'))        
-        CO2fraction = float(request.form.get('CO2fraction'))        
+        press = float(request.form.get('press'))
+        CO2fraction = float(request.form.get('CO2fraction'))
         holdup = float(request.form.get('holdup'))
         gasrate = float(request.form.get('gasrate'))
         mw  = float(request.form.get('mw'))
@@ -152,13 +152,13 @@ def ns():
         ns_rate, ph = ns_corr(temp, press, CO2fraction, holdup, mass_g, mw, vol_l, density_l, gasrate, mass_l, vis_l, vis_g, dia, bicarbonate, ionstrength, roughness)
     return render_template("ns_calc.html",
 	                        ns_rate=ns_rate, ph = ph,
-                            temp = str(temp), press = str(press), CO2fraction = str(CO2fraction), mw = str(mw), gasrate= str(gasrate), 
-                            dia = str(dia),  holdup = str(holdup), vol_l = str(vol_l), density_l = str(density_l), 
-                            vis_l = str(vis_l), vis_g = str(vis_g), bicarbonate = str(bicarbonate), 
+                            temp = str(temp), press = str(press), CO2fraction = str(CO2fraction), mw = str(mw), gasrate= str(gasrate),
+                            dia = str(dia),  holdup = str(holdup), vol_l = str(vol_l), density_l = str(density_l),
+                            vis_l = str(vis_l), vis_g = str(vis_g), bicarbonate = str(bicarbonate),
                             ionstrength = str(ionstrength), roughness = str(roughness))
 
 def ns_corr(temp, press, CO2fraction, holdup, mass_g, mw, vol_l, density_l, gasrate, mass_l, vis_l, vis_g, dia, bicarbonate, ionstrength, roughness):
-    
+
     #mass_g = 100/35.4*1762*24 #kg/hr mass flow of 100 mmscfd of gas of MW at 24
     #mass_l = 0.1
     vol_g = gasrate/35.2/mw*1e6/press #m3/hr #100 mmscfd at KL
@@ -169,26 +169,26 @@ def ns_corr(temp, press, CO2fraction, holdup, mass_g, mw, vol_l, density_l, gasr
     #dia = 16*0.025 #diameter of 16 inches pipe
     density_g = mass_g / vol_g
     #density_l = 800
-    
-    
+
+
     v_sg = gasrate/35.2/(0.76*dia**2)*1e6/press #m/s #velocity of gas at 100 mmscfd at 37 barg
     #v_sl = 0.1 #m/s # no liquid, assume a fake velocity
     v_sl = vol_l/(0.76*dia**2)*3600
-    
+
     #bicarbonate = 2003
     #ionstrength = 39.66
-    
+
     #holdup = 1 #percentage of liquid occupied in the pipe.
-    
+
     #CO2fraction = 0.2
-    ph=norsok.pHCalculator(temp, press, CO2fraction*press, bicarbonate, ionstrength, 2)    
+    ph=norsok.pHCalculator(temp, press, CO2fraction*press, bicarbonate, ionstrength, 2)
     fph=norsok.fpH_Cal(temp,float(ph))
     tempo = norsok.Cal_Norsok(CO2fraction, press, temp, v_sg, v_sl , mass_g, mass_l,vol_g,vol_l,holdup,vis_g,vis_l,roughness,dia, fph,bicarbonate, ionstrength, 2, density_g, density_l)
-    
+
     return tempo, ph
 
 if __name__ == '__main__':
-    app.debug = True
+    #app.debug = True
     app.run()
-    app.run(debug=True)
-    
+    #app.run(debug=True)
+

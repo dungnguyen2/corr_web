@@ -1,57 +1,61 @@
-<!doctype html>
-
+<!DOCTYPE html>
+<html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>FreeCorp Corrosion Model</title>
-	
+
+	<title>FreeCorp Corrosion Model1</title>
+
     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://kit.fontawesome.com/fc661b360f.js" crossorigin="anonymous"></script>
+
 
 </head>
 
-<h1>FreeCorp Corrosion Model</h1>
+
 
 <body>
 
-<div class="main">
-	<form class="pure-form" method="POST" action="/fc">
-	Temperature (degC):<br>
-	<input type="text" name="temp" value = {{temp}}><br>
-	Pressure (barg):<br>
-	<input type="text" name="press" value = {{press}}><br>	
-	CO2 fraction:<br>
-	<input type="text" name="CO2fraction"  value = {{CO2fraction}}> <br>		
-	Gas flowrate (mmscfd):<br>
-	<input type="text" name="gasrate" value = {{gasrate}} >  <br>	
-	MW:<br>
-	<input type="text" name="mw" value = {{mw}} >  <br>		
-	Pipeline diameter (m):<br>
-	<input type="text" name="dia" value = {{dia}} >  <br>			
-	H2S (ppm):<br>
-	<input type="text" name="concH2Sppm" value = {{concH2Sppm}} >  <br>			
-	Fe (ppm):<br>
-	<input type="text" name="concFeppm" value = {{concFeppm}} >  <br>			
-	Acid Acetic (ppm):<br>
-	<input type="text" name="concHAcppm" value = {{concHAcppm}} >  <br>			
-	pH:<br>
-	<input type="text" name="ph" value = {{ph}} >  <br>			
-	<button type="submit" class="pure-button pure-button-primary" value="Submit">Calculate</button>
+<div class="page_wrap">
+<div class="back_home"><a href="\"><i class="fa-regular fa-arrow-left"></i></a></div>
+<h1 class="form_title">FreeCorp Corrosion Model</h1>
+	<form class="pure-form custom-form" method="POST" action="/fc">
+	<div class="form_label"><label>Temperature (degC):</label></div>
+	<div class="form_field"><input type="text" name="temp" value = {{temp}}></div>
+	<div class="form_label"><label>Pressure (barg):</label></div>
+	<div class="form_field"><input type="text" name="press" value = {{press}}></div>
+	<div class="form_label"><label>CO2 fraction:</label></div>
+	<div class="form_field"><input type="text" name="CO2fraction"  value = {{CO2fraction}}></div>
+	<div class="form_label"><label>Gas flowrate (mmscfd):</label></div>
+	<div class="form_field"><input type="text" name="gasrate" value = {{gasrate}} ></div>
+	<div class="form_label"><label>MW:</label></div>
+	<div class="form_field"><input type="text" name="mw" value = {{mw}} ></div>
+	<div class="form_label"><label>Pipeline diameter (m):</label></div>
+	<div class="form_field"><input type="text" name="dia" value = {{dia}} > </div>
+	<div class="form_label"><label>H2S (ppm):</label></div>
+	<div class="form_field"><input type="text" name="concH2Sppm" value = {{concH2Sppm}} > </div>
+	<div class="form_label"><label>Fe (ppm):</label></div>
+	<div class="form_field"><input type="text" name="concFeppm" value = {{concFeppm}} >  </div>
+	<div class="form_label"><label>Acid Acetic (ppm):</label></div>
+	<div class="form_field"><input type="text" name="concHAcppm" value = {{concHAcppm}} > </div>
+	<div class="form_label"><label>pH:</label></div>
+	<div class="form_field"><input type="text" name="ph" value = {{ph}} > </div>
+    <div class="butt_center_wrap">  <button type="submit"value="Submit"  class="pure-button pure-button-primary">Calculate</button></div>
+
 	</form>
-</div>
 
-<br>
-
-<div class="main">
-	{% if fc_rate %}
-	    <p>
-	    <h1 style="border:2px solid Tomato;">
-        {% print("The corrosion rate = {:.2f} mm/year".format(fc_rate)) %}
-        </h1>
-        </p>
+        	{% if fc_rate %}
+	    <div class="cal_result" ><h1>{% print("The corrosion rate = {:.2f} mm/year".format(fc_rate)) %} </h1> </div>
 	{% endif %}
+
+<script>
+
 </div>
-<h2 style="text-align:center;"><a href="\">Home</a></h2>
+
+
+
 </body>
+</html>

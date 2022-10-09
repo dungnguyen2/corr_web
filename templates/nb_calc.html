@@ -1,65 +1,57 @@
 <!doctype html>
-
+<html>
 <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<title>Nyborg Corrosion Model</title>
-	
+
     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-
+<script src="https://kit.fontawesome.com/fc661b360f.js" crossorigin="anonymous"></script>
 </head>
 
-<h1>Nyborg Corrosion Model</h1>
+
 
 <body>
-
-<div class="main">
-	<form class="pure-form" method="POST" action="/nb">
-	Temperature (degC):<br>
-	<input type="text" name="temp" value = {{temp}}><br>
-	Pressure (barg):<br>
-	<input type="text" name="press" value = {{press}}><br>	
-	CO2 fraction:<br>
-	<input type="text" name="CO2fraction"  value = {{CO2fraction}}> <br>		
-	Gas flowrate (mmscfd):<br>
-	<input type="text" name="gasrate" value = {{gasrate}} >  <br>	
-	MW:<br>
-	<input type="text" name="mw" value = {{mw}} >  <br>		
-	Pipeline diameter (m):<br>
-	<input type="text" name="dia" value = {{dia}} >  <br>				
-	Ambient temperature (degC):<br>
-	<input type="text" name="amb_temp" value = {{amb_temp}}>  <br>				
-	Fe (ppm):<br>
-	<input type="text" name="concFeppm" value = {{concFeppm}} >  <br>			
-	Acid Acetic (ppm):<br>
-	<input type="text" name="concHAcppm" value = {{concHAcppm}} >  <br>			
-	pH:<br>
-	<input type="text" name="ph" value = {{ph}} >  <br>			
-	<button type="submit" class="pure-button pure-button-primary" value="Submit">Calculate</button>
+<div class="page_wrap">
+    <div class="back_home"><a href="\"><i class="fa-regular fa-arrow-left"></i></a></div>
+    <h1 class="form_title">Nyborg Corrosion Model</h1>
+	<form class="pure-form custom-form" method="POST" action="/nb">
+	<div class="form_label">Temperature (degC):</div>
+	<div class="form_field"><input type="text" name="temp" value = {{temp}}></div>
+	<div class="form_label">Pressure (barg):</div>
+	<div class="form_field"><input type="text" name="press" value = {{press}}></div>
+	<div class="form_label">CO2 fraction:</div>
+	<div class="form_field"><input type="text" name="CO2fraction"  value = {{CO2fraction}}> </div>
+	<div class="form_label">Gas flowrate (mmscfd):</div>
+	<div class="form_field"><input type="text" name="gasrate" value = {{gasrate}} > </div>
+	<div class="form_label">MW:</div>
+	<div class="form_field"><input type="text" name="mw" value = {{mw}} > </div>
+	<div class="form_label">Pipeline diameter (m):</div>
+	<div class="form_field"><input type="text" name="dia" value = {{dia}} >  </div>
+	<div class="form_label">Ambient temperature (degC):</div>
+	<div class="form_field"><input type="text" name="amb_temp" value = {{amb_temp}}> </div>
+	<div class="form_label">Fe (ppm):</div>
+	<div class="form_field"><input type="text" name="concFeppm" value = {{concFeppm}} > </div>
+	<div class="form_label">Acid Acetic (ppm):</div>
+	<div class="form_field"><input type="text" name="concHAcppm" value = {{concHAcppm}} > </div>
+	<div class="form_label">pH:</div>
+	<div class="form_field"><input type="text" name="ph" value = {{ph}} > </div>
+	<div class="butt_center_wrap"><button type="submit" class="pure-button pure-button-primary" value="Submit">Calculate</button></div>
 	</form>
-</div>
 
-<br>
-
-<div class="main">
 	{% if nb_rate %}
-	    <p>	    <h1 style="border:2px solid Tomato;">
-        {% print("Corrosion rate = {:.2f} mm/year".format(nb_rate)) %}
-        
-        </h1>
-        </p>
+	 <div class="cal_result" >  <h1 > {% print("Corrosion rate = {:.2f} mm/year".format(nb_rate)) %} </h1> </div>
+
 	{% endif %}
 	{% if conden_rate %}
-	    <p>	    <h1 style="border:2px solid Tomato;">
-        {% print("Condensation rate = {:.2f} g/m2/s".format(conden_rate)) %}
-        
-        </h1>
-        </p>
+	 <div class="cal_result" >  <h1> {% print("Condensation rate = {:.2f} g/m2/s".format(conden_rate)) %} </h1>	</div>
+
 	{% endif %}
+
 </div>
 
-<h2 style="text-align:center;"><a href="\">Home</a></h2>
 </body>
+</html>

@@ -1,72 +1,64 @@
 <!doctype html>
-
+<html>
 <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<title>Norsok Corrosion Model</title>
-	
+
     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
 
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-
+		<link rel="stylesheet" type="text/css" href="/style.css">
+<script src="https://kit.fontawesome.com/fc661b360f.js" crossorigin="anonymous"></script>
 </head>
 
-<h1>Norsok Corrosion Model</h1>
 
 <body>
 
-<div class="main">
-	<form class="pure-form" method="POST" action="/ns">
-	Temperature (degC):<br>
-	<input type="text" name="temp" value = {{temp}}><br>
-	Pressure (barg):<br>
-	<input type="text" name="press" value = {{press}}><br>	
-	CO2 fraction:<br>
-	<input type="text" name="CO2fraction"  value = {{CO2fraction}}> <br>	
-	Hold up:<br>
-	<input type="text" name="holdup" value = {{holdup}} >  <br>	
-	Gas flowrate (mmscfd):<br>
-	<input type="text" name="gasrate" value = {{gasrate}} >  <br>	
-	MW:<br>
-	<input type="text" name="mw" value = {{mw}} >  <br>	
-	Liquid flowrate (m3/hr):<br>
-	<input type="text" name="vol_l" value = {{vol_l}} >  <br>	
-	Density of liquid (kg/m3):<br>
-	<input type="text" name="density_l" value = {{density_l}} >  <br>	
-	Viscosity of liquid (cp):<br>
-	<input type="text" name="vis_l" value = {{vis_l}} >  <br>	
-	Viscosity of gas (cp):<br>
-	<input type="text" name="vis_g" value = {{vis_g}} >  <br>	
-	Pipeline diameter (m):<br>
-	<input type="text" name="dia" value = {{dia}} >  <br>	
-	Pipeline roughness (m):<br>
-	<input type="text" name="roughness" value = {{roughness}} >  <br>	
-	Bicarbonate :<br>
-	<input type="text" name="bicarbonate" value = {{bicarbonate}} >  <br>	
-	Ion strength :<br>
-	<input type="text" name="ionstrength" value = {{ionstrength}} >  <br>	
-	<button type="submit" class="pure-button pure-button-primary" value="Submit">Calculate</button>
+<div class="page_wrap">
+    <div class="back_home"><a href="\"><i class="fa-regular fa-arrow-left"></i></a></div>
+    <h1 class="form_title">Norsok Corrosion Model</h1>
+	<form class="pure-form custom-form" method="POST" action="/ns">
+	<div class="form_label">Temperature (degC):</div>
+	<div class="form_field"><input type="text" name="temp" value = {{temp}}></div>
+	<div class="form_label">Pressure (barg):</div>
+	<div class="form_field"><input type="text" name="press" value = {{press}}></div>
+	<div class="form_label">CO2 fraction:</div>
+	<div class="form_field"><input type="text" name="CO2fraction"  value = {{CO2fraction}}> </div>
+	<div class="form_label">Hold up:</div>
+	<div class="form_field"><input type="text" name="holdup" value = {{holdup}} >  </div>
+	<div class="form_label">Gas flowrate (mmscfd):</div>
+	<div class="form_field"><input type="text" name="gasrate" value = {{gasrate}} >  </div>
+	<div class="form_label">MW:</div>
+	<div class="form_field"><input type="text" name="mw" value = {{mw}} >  </div>
+	<div class="form_label">Liquid flowrate (m3/hr):</div>
+	<div class="form_field"><input type="text" name="vol_l" value = {{vol_l}} ></div>
+	<div class="form_label">Density of liquid (kg/m3):</div>
+	<div class="form_field"><input type="text" name="density_l" value = {{density_l}} > </div>
+	<div class="form_label">Viscosity of liquid (cp):</div>
+	<div class="form_field"><input type="text" name="vis_l" value = {{vis_l}} > </div>
+	<div class="form_label">Viscosity of gas (cp):</div>
+	<div class="form_field"><input type="text" name="vis_g" value = {{vis_g}} > </div>
+	<div class="form_label">Pipeline diameter (m):</div>
+	<div class="form_field"><input type="text" name="dia" value = {{dia}} > </div>
+	<div class="form_label">Pipeline roughness (m):</div>
+	<div class="form_field"><input type="text" name="roughness" value = {{roughness}} > </div>
+	<div class="form_label">Bicarbonate :</div>
+	<div class="form_field"><input type="text" name="bicarbonate" value = {{bicarbonate}} > </div>
+	<div class="form_label">Ion strength :</div>
+	<div class="form_field"><input type="text" name="ionstrength" value = {{ionstrength}} >  </div>
+	<div class="butt_center_wrap"><button type="submit" class="pure-button pure-button-primary" value="Submit">Calculate</button></div>
 	</form>
-</div>
 
-<br>
 
-<div class="main">
+
 	{% if ns_rate %}
-	    <p>
-	    <h1 style="border:2px solid Tomato;">
-        {% print("The corrosion rate = {:.2f} mm/year".format(ns_rate)) %}
-        </h1>
-        </p>
+	   <div class="cal_result" > <h1> {% print("The corrosion rate = {:.2f} mm/year".format(ns_rate)) %} </h1> </div>
 	{% endif %}
 	{% if ph %}
-	    <p>
-	    <h1 style="border:2px solid Tomato;">
-        {% print("Calculated pH = {:.2f}".format(ph)) %}
-        </h1>
-        </p>
-	{% endif %}
+	 <div class="cal_result" > <h1> {% print("Calculated pH = {:.2f}".format(ph)) %} </h1> </div>
+ 	{% endif %}
 </div>
-<h2 style="text-align:center;"><a href="\">Home</a></h2>
+
 </body>
+</html>
